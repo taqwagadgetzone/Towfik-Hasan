@@ -1,0 +1,234 @@
+{
+  "entities": {
+    "SiteConfig": {
+      "title": "SiteConfig",
+      "description": "Global website configuration including branding, header/footer, navigation, announcements, theme tokens, contact channels, delivery zones, SEO, and ordered homepage sections.",
+      "type": "object",
+      "properties": {
+        "siteName": { "type": "string", "maxLength": 160 },
+        "tagline": { "type": "string", "maxLength": 240 },
+        "logoUrl": { "type": "string", "maxLength": 800000 },
+        "faviconUrl": { "type": "string", "maxLength": 800000 },
+        "currencySymbol": { "type": "string", "maxLength": 8 },
+        "defaultLanguage": { "type": "string", "enum": ["bn", "en"] },
+        "deliveryZones": { "type": "array" },
+        "announcement": { "type": "object" },
+        "navigation": { "type": "array" },
+        "footer": { "type": "object" },
+        "seo": { "type": "object" },
+        "contact": { "type": "object" },
+        "theme": { "type": "object" },
+        "homepageSections": { "type": "array" },
+        "status": { "type": "string", "enum": ["published", "draft"] },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["siteName", "currencySymbol", "announcement", "navigation", "footer", "seo", "contact", "theme", "homepageSections", "status", "updatedAt"]
+    },
+    "Product": {
+      "title": "Product",
+      "description": "Storefront product with pricing, media, specifications, variations, SEO, and visual description block layout.",
+      "type": "object",
+      "properties": {
+        "name": { "type": "string", "maxLength": 180 },
+        "modelNumber": { "type": "string", "maxLength": 80 },
+        "slug": { "type": "string", "maxLength": 180, "pattern": "^[a-z0-9-]+$" },
+        "category": { "type": "string", "maxLength": 80 },
+        "regularPrice": { "type": "number" },
+        "discountPrice": { "type": "number" },
+        "images": { "type": "array" },
+        "videoUrl": { "type": "string", "maxLength": 500 },
+        "shortDescription": { "type": "string", "maxLength": 600 },
+        "fullDescription": { "type": "string", "maxLength": 6000 },
+        "specifications": { "type": "array" },
+        "features": { "type": "array" },
+        "warranty": { "type": "string", "maxLength": 500 },
+        "deliveryInfo": { "type": "string", "maxLength": 500 },
+        "stock": { "type": "number" },
+        "colors": { "type": "array" },
+        "variations": { "type": "array" },
+        "seoTitle": { "type": "string", "maxLength": 180 },
+        "seoDescription": { "type": "string", "maxLength": 400 },
+        "badges": { "type": "array" },
+        "relatedProductIds": { "type": "array" },
+        "descriptionBlocks": { "type": "array" },
+        "draftPayload": { "type": "object" },
+        "status": { "type": "string", "enum": ["published", "draft"] },
+        "isFeatured": { "type": "boolean" },
+        "isBestSeller": { "type": "boolean" },
+        "isNewArrival": { "type": "boolean" },
+        "viewsCount": { "type": "number" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["name", "modelNumber", "slug", "category", "regularPrice", "images", "shortDescription", "stock", "descriptionBlocks", "status", "createdAt", "updatedAt"]
+    },
+    "ProductSecret": {
+      "title": "ProductSecret",
+      "description": "Admin-only internal product cost data such as purchasePrice.",
+      "type": "object",
+      "properties": {
+        "productId": { "type": "string", "maxLength": 128 },
+        "purchasePrice": { "type": "number" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["productId", "purchasePrice", "updatedAt"]
+    },
+    "CmsPage": {
+      "title": "CmsPage",
+      "description": "Editable custom or system page with visual blocks, draft state, SEO, and publication controls.",
+      "type": "object",
+      "properties": {
+        "title": { "type": "string", "maxLength": 160 },
+        "slug": { "type": "string", "maxLength": 160, "pattern": "^[a-z0-9-]+$" },
+        "seoTitle": { "type": "string", "maxLength": 180 },
+        "seoDescription": { "type": "string", "maxLength": 400 },
+        "blocks": { "type": "array" },
+        "draftPayload": { "type": "object" },
+        "isSystemPage": { "type": "boolean" },
+        "status": { "type": "string", "enum": ["published", "draft"] },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["title", "slug", "blocks", "status", "createdAt", "updatedAt"]
+    },
+    "DescriptionTemplate": {
+      "title": "DescriptionTemplate",
+      "description": "Reusable visual description block template for products.",
+      "type": "object",
+      "properties": {
+        "name": { "type": "string", "maxLength": 120 },
+        "category": { "type": "string", "maxLength": 80 },
+        "description": { "type": "string", "maxLength": 400 },
+        "blocks": { "type": "array" },
+        "isBuiltIn": { "type": "boolean" },
+        "isPublic": { "type": "boolean" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["name", "blocks", "isPublic", "createdAt", "updatedAt"]
+    },
+    "MediaAsset": {
+      "title": "MediaAsset",
+      "description": "Uploaded or registered image asset in the CMS Media Library.",
+      "type": "object",
+      "properties": {
+        "title": { "type": "string", "maxLength": 140 },
+        "url": { "type": "string", "maxLength": 800000 },
+        "folder": { "type": "string", "maxLength": 60 },
+        "altText": { "type": "string", "maxLength": 200 },
+        "isPublic": { "type": "boolean" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["title", "url", "folder", "isPublic", "createdAt"]
+    },
+    "Revision": {
+      "title": "Revision",
+      "description": "Immutable content revision snapshot for restoring previous versions.",
+      "type": "object",
+      "properties": {
+        "entityType": { "type": "string", "enum": ["siteConfig", "product", "page", "template"] },
+        "entityId": { "type": "string", "maxLength": 128 },
+        "label": { "type": "string", "maxLength": 200 },
+        "action": { "type": "string", "enum": ["save_draft", "publish", "restore"] },
+        "snapshot": { "type": "object" },
+        "authorEmail": { "type": "string", "maxLength": 180 },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["entityType", "entityId", "label", "action", "snapshot", "authorEmail", "createdAt"]
+    },
+    "Order": {
+      "title": "Order",
+      "description": "Customer order submitted from storefront checkout.",
+      "type": "object",
+      "properties": {
+        "orderNumber": { "type": "string", "maxLength": 40 },
+        "customerUid": { "type": "string", "maxLength": 128 },
+        "customerName": { "type": "string", "maxLength": 120 },
+        "customerPhone": { "type": "string", "maxLength": 40 },
+        "customerEmail": { "type": "string", "maxLength": 160 },
+        "shippingAddress": { "type": "string", "maxLength": 400 },
+        "notes": { "type": "string", "maxLength": 500 },
+        "deliveryZone": { "type": "string", "maxLength": 120 },
+        "deliveryFee": { "type": "number" },
+        "subtotal": { "type": "number" },
+        "paymentMethod": { "type": "string", "enum": ["cod", "online"] },
+        "items": { "type": "array" },
+        "totalAmount": { "type": "number" },
+        "status": { "type": "string", "enum": ["pending", "confirmed", "processing", "shipped", "delivered", "cancelled", "returned"] },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["orderNumber", "customerName", "customerPhone", "shippingAddress", "paymentMethod", "items", "totalAmount", "status", "createdAt", "updatedAt"]
+    },
+    "IncompleteOrder": {
+      "title": "IncompleteOrder",
+      "description": "Partially entered COD checkout lead captured before final confirmation.",
+      "type": "object",
+      "properties": {
+        "customerName": { "type": "string", "maxLength": 120 },
+        "customerPhone": { "type": "string", "maxLength": 40 },
+        "shippingAddress": { "type": "string", "maxLength": 400 },
+        "productName": { "type": "string", "maxLength": 180 },
+        "totalAmount": { "type": "number" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["customerPhone", "productName", "updatedAt"]
+    },
+    "AdminUser": {
+      "title": "AdminUser",
+      "description": "Authorized CMS administrator and permission role.",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string", "maxLength": 128 },
+        "email": { "type": "string", "maxLength": 180 },
+        "role": { "type": "string", "enum": ["super_admin", "editor", "catalog_manager"] },
+        "permissions": { "type": "array" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["uid", "email", "role", "permissions", "createdAt", "updatedAt"]
+    }
+  },
+  "firestore": {
+    "/siteConfig/{configId}": {
+      "schema": { "$ref": "#/entities/SiteConfig" },
+      "description": "Published and draft global site settings, theme, contact settings, delivery zones, and homepage sections."
+    },
+    "/products/{productId}": {
+      "schema": { "$ref": "#/entities/Product" },
+      "description": "Storefront products with complete specs, media, SEO, and visual description blocks."
+    },
+    "/productSecrets/{productId}": {
+      "schema": { "$ref": "#/entities/ProductSecret" },
+      "description": "Admin-only internal purchase cost per product."
+    },
+    "/pages/{pageId}": {
+      "schema": { "$ref": "#/entities/CmsPage" },
+      "description": "Editable custom and policy pages."
+    },
+    "/descriptionTemplates/{templateId}": {
+      "schema": { "$ref": "#/entities/DescriptionTemplate" },
+      "description": "Reusable visual product description design templates."
+    },
+    "/mediaLibrary/{mediaId}": {
+      "schema": { "$ref": "#/entities/MediaAsset" },
+      "description": "CMS media assets and uploaded images."
+    },
+    "/revisions/{revisionId}": {
+      "schema": { "$ref": "#/entities/Revision" },
+      "description": "Immutable content revision history snapshots."
+    },
+    "/orders/{orderId}": {
+      "schema": { "$ref": "#/entities/Order" },
+      "description": "Storefront customer orders."
+    },
+    "/incompleteOrders/{leadId}": {
+      "schema": { "$ref": "#/entities/IncompleteOrder" },
+      "description": "Abandoned or incomplete COD checkout leads."
+    },
+    "/admins/{adminUid}": {
+      "schema": { "$ref": "#/entities/AdminUser" },
+      "description": "CMS admin permissions and role assignments."
+    }
+  }
+}

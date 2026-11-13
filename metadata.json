@@ -1,0 +1,6 @@
+{
+  "name": "Taqwa Gadget Zone",
+  "description": "Complete E-Commerce Storefront and Visual CMS Control System for Taqwa Gadget Zone.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
